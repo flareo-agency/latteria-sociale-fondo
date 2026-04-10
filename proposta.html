@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposta Commerciale — Latteria Sociale di Fondo | Flareo Studio</title>
+<meta name="description" content="Proposta commerciale Flareo Studio per il redesign del sito Latteria Sociale di Fondo. 180 anni di cooperativa casearia in Val di Non meritano un sito editoriale all'altezza.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   PROPOSTA · LATTERIA SOCIALE DI FONDO
+   Same style system as editorial prototype
+   Cream + Fern + Ink · Fraunces + Inter
+   ========================================================= */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cream:      #F5EFE1;
+  --cream-soft: #EDE5D0;
+  --sand:       #E3DAC1;
+  --stone:      #B0A891;
+  --fern:       #4E5C3E;
+  --fern-soft:  #6B7A58;
+  --ink:        #1C1A14;
+  --ink-soft:   #2D2A22;
+  --ink-mute:   #7A736A;
+  --line:       rgba(28, 26, 20, 0.12);
+  --line-strong: rgba(28, 26, 20, 0.25);
+
+  --font-display: 'Fraunces', 'Times New Roman', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+
+  --nav-h: 72px;
+  --max-w: 1680px;
+  --gutter: clamp(20px, 4vw, 56px);
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-long: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.45;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; height: auto; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+/* Display type */
+.mega {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 144;
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.015em;
+  font-size: clamp(56px, 10vw, 180px);
+}
+.big {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 144;
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  font-size: clamp(44px, 7vw, 120px);
+}
+.mid {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 72;
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.005em;
+  font-size: clamp(28px, 4vw, 56px);
+}
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-mute);
+}
+.lead {
+  font-family: var(--font-body);
+  font-size: clamp(18px, 1.5vw, 24px);
+  line-height: 1.45;
+  font-weight: 400;
+  color: var(--ink);
+  max-width: 58ch;
+}
+p { max-width: 64ch; }
+p + p { margin-top: 1.15em; }
+
+/* =====================================================
+   NAVIGATION
+   ===================================================== */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  background: var(--cream);
+  border-bottom: 1px solid var(--line);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  transition: background 0.35s var(--ease), border-color 0.35s var(--ease);
+}
+.nav.scrolled {
+  background: rgba(245, 239, 225, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.nav__inner {
+  width: 100%;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.nav__brand {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 72;
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: -0.005em;
+  line-height: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.nav__brand .since {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+}
+.nav__meta {
+  display: flex;
+  gap: clamp(18px, 2.4vw, 40px);
+  list-style: none;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-mute);
+}
+.nav__meta li { padding: 6px 0; }
+.nav__cta {
+  font-size: 13px;
+  padding: 10px 18px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  text-transform: lowercase;
+  letter-spacing: 0.02em;
+  transition: all 0.3s var(--ease);
+  background: var(--ink);
+  color: var(--cream);
+}
+.nav__cta:hover { background: transparent; color: var(--ink); }
+@media (max-width: 900px) {
+  .nav__meta { display: none; }
+}
+
+/* =====================================================
+   LAYOUT
+   ===================================================== */
+main { padding-top: var(--nav-h); }
+
+.wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.section { padding: clamp(80px, 10vw, 180px) 0; }
+.section--tight { padding: clamp(60px, 7vw, 120px) 0; }
+.section--hero { padding: clamp(40px, 5vw, 80px) 0 clamp(60px, 7vw, 110px); }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 96px); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(24px, 3vw, 48px); }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(20px, 2.5vw, 40px); }
+@media (max-width: 900px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 40px; }
+}
+
+.meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: clamp(40px, 5vw, 80px);
+  flex-wrap: wrap;
+}
+
+/* =====================================================
+   COMPONENTS
+   ===================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 26px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: lowercase;
+  letter-spacing: 0.01em;
+  transition: all 0.35s var(--ease);
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+.btn:hover { background: var(--ink); color: var(--cream); }
+.btn--solid { background: var(--ink); color: var(--cream); }
+.btn--solid:hover { background: transparent; color: var(--ink); }
+.btn .arrow { transition: transform 0.35s var(--ease); }
+.btn:hover .arrow { transform: translateX(4px); }
+
+.pullquote {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 72;
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(30px, 3.8vw, 56px);
+  line-height: 1.15;
+  letter-spacing: -0.005em;
+  max-width: 22ch;
+  padding: clamp(40px, 6vw, 80px) 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin: clamp(40px, 6vw, 80px) 0;
+  color: var(--fern);
+}
+
+.essay { max-width: 62ch; }
+.essay p { margin-top: 1.2em; }
+.essay p:first-child { margin-top: 0; }
+.essay p:first-child::first-line { font-variant: small-caps; letter-spacing: 0.05em; }
+
+.list-naked { list-style: none; padding: 0; }
+.list-naked li {
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 60px 1fr 2fr;
+  gap: 24px;
+  align-items: baseline;
+}
+.list-naked li .num {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 24;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+}
+.list-naked li .label {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 72;
+  font-size: clamp(20px, 1.9vw, 28px);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  line-height: 1.1;
+}
+.list-naked li .desc {
+  color: var(--ink-mute);
+  font-size: 14px;
+  max-width: 56ch;
+}
+@media (max-width: 720px) {
+  .list-naked li {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 20px 0;
+  }
+}
+
+.marquee {
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 30px 0;
+  white-space: nowrap;
+  background: var(--cream-soft);
+}
+.marquee__track {
+  display: inline-block;
+  animation: marquee 45s linear infinite;
+}
+.marquee span {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 144;
+  font-size: clamp(40px, 5vw, 80px);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.005em;
+  padding: 0 30px;
+  color: var(--fern);
+}
+.marquee span::after { content: '·'; margin-left: 60px; color: var(--ink-mute); font-style: normal; }
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Pricing tiers — editorial style */
+.tier-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-top: clamp(40px, 5vw, 80px);
+}
+.tier {
+  background: var(--cream);
+  padding: clamp(32px, 4vw, 56px) clamp(28px, 3vw, 40px);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  transition: background 0.4s var(--ease);
+}
+.tier:hover { background: var(--cream-soft); }
+.tier--featured { background: var(--fern); color: var(--cream); }
+.tier--featured .tier__badge { color: var(--cream); border-color: rgba(245, 239, 225, 0.25); }
+.tier--featured .tier__price-note,
+.tier--featured .tier__desc,
+.tier--featured .tier__features li { color: rgba(245, 239, 225, 0.72); }
+.tier--featured .tier__features li::before { color: var(--cream); }
+.tier--featured:hover { background: var(--fern); }
+.tier--featured .btn { border-color: var(--cream); color: var(--cream); }
+.tier--featured .btn:hover { background: var(--cream); color: var(--fern); }
+
+.tier__badge {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--ink-mute);
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+  display: block;
+  width: fit-content;
+  padding-right: 24px;
+}
+.tier__name {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 72;
+  font-size: clamp(26px, 2.4vw, 36px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.005em;
+}
+.tier__price {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 144;
+  font-size: clamp(40px, 4.5vw, 64px);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+}
+.tier__price-note {
+  font-family: var(--font-body);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-mute);
+  margin-top: 6px;
+}
+.tier__desc {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 48;
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.35;
+  color: var(--ink-soft);
+  max-width: 32ch;
+}
+.tier__features {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.tier__features li {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  padding-left: 20px;
+  position: relative;
+}
+.tier__features li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--ink-mute);
+}
+.tier .btn { align-self: flex-start; margin-top: 8px; }
+@media (max-width: 900px) {
+  .tier-grid { grid-template-columns: 1fr; }
+}
+
+/* Timeline */
+.timeline { display: flex; flex-direction: column; }
+.timeline__item {
+  display: grid;
+  grid-template-columns: 120px 1fr 180px;
+  gap: clamp(24px, 3vw, 56px);
+  padding: clamp(32px, 4vw, 56px) 0;
+  border-top: 1px solid var(--line);
+  align-items: baseline;
+}
+.timeline__item:last-child { border-bottom: 1px solid var(--line); }
+.timeline__num {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 144;
+  font-size: clamp(40px, 5vw, 72px);
+  font-weight: 700;
+  line-height: 0.95;
+  color: var(--fern);
+  letter-spacing: -0.01em;
+}
+.timeline__phase {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 72;
+  font-size: clamp(24px, 2.4vw, 36px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.005em;
+  margin-bottom: 12px;
+}
+.timeline__desc { font-size: 15px; color: var(--ink-soft); max-width: 56ch; }
+.timeline__dur {
+  font-family: var(--font-body);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-mute);
+  text-align: right;
+}
+@media (max-width: 900px) {
+  .timeline__item { grid-template-columns: 1fr; gap: 12px; }
+  .timeline__dur { text-align: left; }
+  .timeline__num { font-size: 40px; }
+}
+
+/* Why Flareo */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+.why-item {
+  padding: clamp(36px, 4vw, 56px) clamp(0px, 2vw, 32px);
+  border-bottom: 1px solid var(--line);
+}
+.why-item:nth-child(odd) { border-right: 1px solid var(--line); padding-right: clamp(24px, 3vw, 48px); }
+.why-item:nth-child(even) { padding-left: clamp(24px, 3vw, 48px); }
+.why-item__num {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 24;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 18px;
+}
+.why-item__title {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 72;
+  font-size: clamp(26px, 2.6vw, 40px);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  line-height: 1.05;
+  margin-bottom: 16px;
+}
+.why-item__text { color: var(--ink-soft); font-size: 15px; line-height: 1.55; }
+@media (max-width: 900px) {
+  .why-grid { grid-template-columns: 1fr; }
+  .why-item:nth-child(odd) { border-right: none; padding-right: 0; }
+  .why-item:nth-child(even) { padding-left: 0; }
+}
+
+/* CTA block */
+.cta-block {
+  background: var(--ink);
+  color: var(--cream);
+  padding: clamp(60px, 8vw, 120px) clamp(40px, 5vw, 80px);
+  text-align: center;
+  margin-top: clamp(40px, 5vw, 80px);
+}
+.cta-block .mega { color: var(--cream); }
+.cta-block .lead { color: rgba(245, 239, 225, 0.78); margin: 24px auto 40px; }
+.cta-block .btn { border-color: var(--cream); color: var(--cream); }
+.cta-block .btn:hover { background: var(--cream); color: var(--ink); }
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--line);
+  padding: clamp(60px, 8vw, 120px) 0 40px;
+  background: var(--cream);
+}
+.footer__top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 32px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid var(--line);
+}
+.footer__mega {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 144;
+  font-size: clamp(48px, 8vw, 140px);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.015em;
+  padding: clamp(40px, 6vw, 100px) 0;
+  color: var(--fern);
+}
+.footer__col h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-mute);
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+.footer__col ul { list-style: none; }
+.footer__col li { padding: 6px 0; font-size: 14px; }
+.footer__col a:hover { opacity: 0.55; }
+.footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: 30px;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-mute);
+}
+@media (max-width: 900px) { .footer__top { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .footer__top { grid-template-columns: 1fr; gap: 40px; } }
+
+/* Reveal animations */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s var(--ease-long), transform 0.8s var(--ease-long); }
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* Print */
+@media print {
+  body { background: white; }
+  .nav, .cta-block .btn, .no-print { display: none !important; }
+  .reveal { opacity: 1; transform: none; }
+  .section { padding: 40px 0; break-inside: avoid; }
+  .tier, .timeline__item { break-inside: avoid; }
+}
+@page { margin: 20mm; }
+</style>
+</head>
+<body>
+
+<!-- ============================= NAVIGATION ============================= -->
+<nav class="nav" id="nav">
+  <div class="nav__inner">
+    <a class="nav__brand" href="#">
+      <span class="mark">Flareo</span>
+      <span class="since">× Latteria · Aprile 2026</span>
+    </a>
+    <ul class="nav__meta">
+      <li>Proposta Commerciale</li>
+      <li>v1.0</li>
+    </ul>
+    <a class="nav__cta" href="mailto:flareo.agency@gmail.com">rispondi</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ============================= HERO ============================= -->
+<section class="section section--hero">
+  <div class="wrap">
+    <div class="meta-row">
+      <span class="eyebrow">Proposta commerciale · riservata</span>
+      <span class="eyebrow">Flareo Studio · aprile 2026</span>
+      <span class="eyebrow">Validità · 30 giorni</span>
+    </div>
+    <h1 class="mega">Un sito<br>all'altezza<br>di 180 anni<br>di latte buono.</h1>
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:32px; flex-wrap:wrap; margin-top: clamp(40px, 5vw, 72px);">
+      <p class="lead">Proposta di redesign e sviluppo del nuovo sito web per <strong>Latteria Sociale di Fondo</strong>. Un progetto editoriale che racconta quasi due secoli di cooperativa casearia, valorizza il catalogo di formaggi di malga e porta clienti qualificati ai due punti vendita di Fondo e Revò.</p>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <a class="btn btn--solid" href="#proposta">leggi la proposta <span class="arrow">→</span></a>
+        <a class="btn" href="index.html" target="_blank">visualizza prototipo <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= MARQUEE ============================= -->
+<section style="margin-top: clamp(20px, 3vw, 40px);">
+  <div class="marquee">
+    <div class="marquee__track">
+      <span>Editoriale</span><span>180 anni</span><span>Val di Non</span><span>Dal 1845</span><span>Cooperativa</span><span>Editoriale</span><span>180 anni</span><span>Val di Non</span><span>Dal 1845</span><span>Cooperativa</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= PREMESSA ============================= -->
+<section class="section">
+  <div class="wrap">
+    <div class="grid-2">
+      <div>
+        <span class="eyebrow reveal">— Premessa</span>
+        <h2 class="big reveal" style="margin-top: 18px;">Il vostro latte merita un sito che lo racconti.</h2>
+      </div>
+      <div class="essay reveal">
+        <p>La Latteria Sociale di Fondo è una realtà rara: 180 anni di cooperativa ininterrotta, 40 soci conferitori, un caseificio che lavora il latte di malga del Monte Mais-Kofel in nove caciotte, cinque specialità e due yogurt artigianali.</p>
+        <p>Il sito attuale, però, non è all'altezza. Non racconta la storia, non fa respirare il catalogo, non dà peso al territorio. Chi vi cerca online non capisce che cosa vi rende diversi dagli scaffali della GDO.</p>
+        <p>Questa proposta nasce da un prototipo già costruito — non promesse, ma pagine reali che potete navigare, criticare, approvare. Poi, se ci date fiducia, lo portiamo in produzione.</p>
+      </div>
+    </div>
+
+    <div class="pullquote reveal">«Il latte non si tradisce — e nemmeno il web, se lo tratti con rispetto.»</div>
+  </div>
+</section>
+
+<!-- ============================= IL SITO OGGI ============================= -->
+<section class="section--tight">
+  <div class="wrap">
+    <div class="meta-row">
+      <span class="eyebrow">01 · Analisi</span>
+      <span class="eyebrow">Stato attuale</span>
+      <span class="eyebrow">10 criticità</span>
+    </div>
+    <h2 class="big reveal" style="margin-bottom: clamp(40px, 5vw, 80px);">Il sito oggi.</h2>
+
+    <ul class="list-naked">
+      <li>
+        <span class="num">01 —</span>
+        <span class="label">Storia senza voce</span>
+        <span class="desc">180 anni di cooperativa ridotti a un paragrafo. Nessun racconto del 1845, dei soci, del lavoro quotidiano in caseificio.</span>
+      </li>
+      <li>
+        <span class="num">02 —</span>
+        <span class="label">Catalogo piatto</span>
+        <span class="desc">20 prodotti (caciotte, specialità, yogurt) mostrati senza gerarchia né storytelling. Impossibile capire perché una caciotta al cumino sia diversa da una al tartufo.</span>
+      </li>
+      <li>
+        <span class="num">03 —</span>
+        <span class="label">Mobile non responsivo</span>
+        <span class="desc">Il design non si adatta a smartphone o tablet. La maggior parte dei visitatori scappa in pochi secondi.</span>
+      </li>
+      <li>
+        <span class="num">04 —</span>
+        <span class="label">SEO debole</span>
+        <span class="desc">Meta tag assenti, heading confusi, nessuno schema markup LocalBusiness. Scarsa visibilità per ricerche come "formaggio Val di Non".</span>
+      </li>
+      <li>
+        <span class="num">05 —</span>
+        <span class="label">Territorio invisibile</span>
+        <span class="desc">Monte Mais-Kofel, malghe, pascoli in quota: zero foto, zero mappa, zero racconto. Il valore geografico è sprecato.</span>
+      </li>
+      <li>
+        <span class="num">06 —</span>
+        <span class="label">Performance lenta</span>
+        <span class="desc">Tempi di caricamento oltre 4 secondi. Immagini non compresse, codice datato. Google penalizza.</span>
+      </li>
+      <li>
+        <span class="num">07 —</span>
+        <span class="label">Punti vendita nascosti</span>
+        <span class="desc">I due spacci di Fondo e Revò sono sepolti in fondo al menu. Orari, indirizzi e mappa non in evidenza.</span>
+      </li>
+      <li>
+        <span class="num">08 —</span>
+        <span class="label">Monolingua</span>
+        <span class="desc">Solo italiano. Nessuna versione tedesca per il turismo sudtirolese, nessuna inglese per il mercato estivo.</span>
+      </li>
+      <li>
+        <span class="num">09 —</span>
+        <span class="label">Nessun lead capture</span>
+        <span class="desc">Nessuna newsletter, nessun form strutturato per visite in caseificio. Opportunità di contatto perse.</span>
+      </li>
+      <li>
+        <span class="num">10 —</span>
+        <span class="label">Accessibilità scarsa</span>
+        <span class="desc">Il sito non rispetta WCAG. Rischio legale, penalizzazione SEO, esclusione di utenti con disabilità.</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================= LA PROPOSTA ============================= -->
+<section class="section" id="proposta">
+  <div class="wrap">
+    <div class="meta-row">
+      <span class="eyebrow">02 · Proposta</span>
+      <span class="eyebrow">Il nuovo sito</span>
+      <span class="eyebrow">12 sezioni · editoriale</span>
+    </div>
+
+    <div class="grid-2">
+      <div>
+        <h2 class="big reveal">Un sito editoriale che respira.</h2>
+      </div>
+      <div class="essay reveal">
+        <p>Abbiamo ripensato il sito come una rivista d'alpeggio: tipografia serif variabile (Fraunces), tavolozza calda cream + sand + fern, spazi ampi, fotografie in primo piano. Ogni sezione racconta un capitolo — 1845, il Monte Mais-Kofel, i nostrani, le caciotte, le specialità, gli yogurt, il territorio, i punti vendita.</p>
+        <p>Non è un template. È un sistema di design costruito su misura, con componenti riutilizzabili, tipografia fluida e un ritmo editoriale che dà peso a ogni prodotto.</p>
+      </div>
+    </div>
+
+    <ul class="list-naked" style="margin-top: clamp(60px, 7vw, 100px);">
+      <li>
+        <span class="num">→</span>
+        <span class="label">Design editoriale</span>
+        <span class="desc">Fraunces + Inter, tavolozza cream/sand/fern/ink, layout a griglia con ampi respiri. L'estetica del food premium italiano, non del brochureware cooperativo.</span>
+      </li>
+      <li>
+        <span class="num">→</span>
+        <span class="label">Mobile-first responsive</span>
+        <span class="desc">Perfetto su smartphone, tablet e desktop. Tipografia fluida con clamp(), immagini ottimizzate, touch-friendly.</span>
+      </li>
+      <li>
+        <span class="num">→</span>
+        <span class="label">Catalogo narrativo</span>
+        <span class="desc">I 20 prodotti (9 caciotte, 5 specialità, 2 yogurt, panna e nostrani) divisi in quattro capitoli visivi con copy dedicato e gerarchia chiara.</span>
+      </li>
+      <li>
+        <span class="num">→</span>
+        <span class="label">SEO tecnico completo</span>
+        <span class="desc">Meta tag, schema markup LocalBusiness + Product, sitemap XML, open graph, heading strutturati. Pronti a scalare Google Maps e ricerca locale.</span>
+      </li>
+      <li>
+        <span class="num">→</span>
+        <span class="label">Performance sotto 2 secondi</span>
+        <span class="desc">Immagini in WebP, CSS minimale, zero framework pesanti, CDN globale. Core Web Vitals in verde.</span>
+      </li>
+      <li>
+        <span class="num">→</span>
+        <span class="label">12 sezioni professionali</span>
+        <span class="desc">Hero, Prologo, Storia 1845, Monte Mais, Nostrani, Caciotte, Specialità, Yogurt, Territorio, Valori, Punti vendita, Contatti. Ogni capitolo con il suo tono.</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================= IL PROTOTIPO ============================= -->
+<section class="section--tight" style="background: var(--sand);">
+  <div class="wrap">
+    <div class="grid-2" style="align-items: center;">
+      <div>
+        <span class="eyebrow">03 · Prototipo</span>
+        <h2 class="mid reveal" style="margin-top: 18px;">Navigatelo prima di firmare.</h2>
+        <p class="lead reveal" style="margin-top: 24px;">Invece di promesse, abbiamo costruito un prototipo completo di 12 sezioni. Potete cliccare, leggere, criticare. Se vi convince, lo portiamo in produzione. Se non vi convince, lo sistemiamo insieme.</p>
+      </div>
+      <div class="reveal" style="text-align: right;">
+        <a class="btn btn--solid" href="index.html" target="_blank">apri il prototipo <span class="arrow">→</span></a>
+        <div style="margin-top: 16px; font-family: var(--font-body); font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-mute);">
+          12 sezioni · responsive · interattivo
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= PRICING ============================= -->
+<section class="section">
+  <div class="wrap">
+    <div class="meta-row">
+      <span class="eyebrow">04 · Investimento</span>
+      <span class="eyebrow">Tre livelli</span>
+      <span class="eyebrow">IVA esclusa</span>
+    </div>
+    <h2 class="big reveal">Servizi e investimento.</h2>
+    <p class="lead reveal" style="margin-top: 24px;">Tre livelli pensati per scalare con la cooperativa. Il <strong>Base</strong> è tutto quello che serve per lanciare il nuovo sito editoriale. Il <strong>Premium</strong> aggiunge CMS, multilingua (DE/EN) e SEO locale. L'<strong>Enterprise</strong> è per quando vorrete l'e-commerce con spedizione refrigerata, il booking visite in caseificio, la newsletter stagionale.</p>
+
+    <div class="tier-grid">
+
+      <!-- BASE -->
+      <div class="tier">
+        <span class="tier__badge">01 · Base</span>
+        <div>
+          <div class="tier__name">Nuovo sito<br>editoriale</div>
+          <div class="tier__desc">Tutto quello che serve per lanciare.</div>
+        </div>
+        <div>
+          <div class="tier__price">€4–6k</div>
+          <div class="tier__price-note">Una tantum · prezzo fisso</div>
+        </div>
+        <ul class="tier__features">
+          <li>Design responsivo · 12 sezioni</li>
+          <li>Catalogo narrativo · 20 prodotti</li>
+          <li>Copywriting italiano professionale</li>
+          <li>SEO base (meta, heading, sitemap)</li>
+          <li>Certificato SSL (HTTPS)</li>
+          <li>Deploy e messa online</li>
+          <li>30 giorni di supporto post-lancio</li>
+          <li>Formazione base per aggiornamenti</li>
+        </ul>
+        <a class="btn" href="mailto:flareo.agency@gmail.com?subject=Latteria · Base">scegli base <span class="arrow">→</span></a>
+      </div>
+
+      <!-- PREMIUM -->
+      <div class="tier tier--featured">
+        <span class="tier__badge">02 · Premium · consigliato</span>
+        <div>
+          <div class="tier__name">Gestione<br>e multilingua</div>
+          <div class="tier__desc">Quando volete scalare e gestire da soli.</div>
+        </div>
+        <div>
+          <div class="tier__price">+€1,8k</div>
+          <div class="tier__price-note">In aggiunta al Base</div>
+        </div>
+        <ul class="tier__features">
+          <li>Integrazione CMS (WordPress o Strapi)</li>
+          <li>Versione tedesca e inglese</li>
+          <li>Galleria fotografica con lightbox</li>
+          <li>Google Analytics + Search Console</li>
+          <li>SEO locale (Google My Business x2 spacci)</li>
+          <li>Ottimizzazione performance avanzata</li>
+          <li>3 mesi di supporto esteso</li>
+        </ul>
+        <a class="btn" href="mailto:flareo.agency@gmail.com?subject=Latteria · Premium">scegli premium <span class="arrow">→</span></a>
+      </div>
+
+      <!-- ENTERPRISE -->
+      <div class="tier">
+        <span class="tier__badge">03 · Enterprise</span>
+        <div>
+          <div class="tier__name">E-commerce<br>e booking</div>
+          <div class="tier__desc">Quando il sito diventa un secondo spaccio.</div>
+        </div>
+        <div>
+          <div class="tier__price">Su misura</div>
+          <div class="tier__price-note">Preventivo dedicato</div>
+        </div>
+        <ul class="tier__features">
+          <li>E-commerce con spedizione refrigerata</li>
+          <li>Booking visite in caseificio</li>
+          <li>Newsletter stagionale automatizzata</li>
+          <li>SEO avanzato + content marketing</li>
+          <li>Gestione social media</li>
+          <li>Integrazione CRM + fidelity</li>
+          <li>SLA di supporto 24/7</li>
+        </ul>
+        <a class="btn" href="mailto:flareo.agency@gmail.com?subject=Latteria · Enterprise">richiedi preventivo <span class="arrow">→</span></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================= TIMELINE ============================= -->
+<section class="section">
+  <div class="wrap">
+    <div class="meta-row">
+      <span class="eyebrow">05 · Timeline</span>
+      <span class="eyebrow">Dalla firma al lancio</span>
+      <span class="eyebrow">7–9 settimane</span>
+    </div>
+    <h2 class="big reveal">Come lavoriamo.</h2>
+
+    <div class="timeline" style="margin-top: clamp(40px, 5vw, 80px);">
+      <div class="timeline__item">
+        <div class="timeline__num">01</div>
+        <div>
+          <div class="timeline__phase">Kick-off e revisione</div>
+          <div class="timeline__desc">Allineamento con i soci, approvazione del prototipo, raccolta contenuti finali (fotografie del caseificio, documenti storici, schede prodotto).</div>
+        </div>
+        <div class="timeline__dur">1 settimana</div>
+      </div>
+
+      <div class="timeline__item">
+        <div class="timeline__num">02</div>
+        <div>
+          <div class="timeline__phase">Design e contenuti</div>
+          <div class="timeline__desc">Affinamento del design finale, copywriting definitivo in italiano, ottimizzazione delle immagini di malga e caciotte, definizione dei quattro capitoli.</div>
+        </div>
+        <div class="timeline__dur">2 settimane</div>
+      </div>
+
+      <div class="timeline__item">
+        <div class="timeline__num">03</div>
+        <div>
+          <div class="timeline__phase">Sviluppo</div>
+          <div class="timeline__desc">Build del sito di produzione, integrazione del CMS (se Premium), setup analytics, schema LocalBusiness per Fondo e Revò, test multi-browser.</div>
+        </div>
+        <div class="timeline__dur">2–3 settimane</div>
+      </div>
+
+      <div class="timeline__item">
+        <div class="timeline__num">04</div>
+        <div>
+          <div class="timeline__phase">Test e revisioni</div>
+          <div class="timeline__desc">QA completo, ottimizzazione performance, ciclo di revisione con il consiglio di amministrazione, round di feedback strutturati.</div>
+        </div>
+        <div class="timeline__dur">1 settimana</div>
+      </div>
+
+      <div class="timeline__item">
+        <div class="timeline__num">05</div>
+        <div>
+          <div class="timeline__phase">Lancio e formazione</div>
+          <div class="timeline__desc">Deploy in produzione, monitoraggio live nelle prime 72 ore, formazione del team sulla gestione dei contenuti e delle schede prodotto.</div>
+        </div>
+        <div class="timeline__dur">1 settimana</div>
+      </div>
+    </div>
+
+    <div class="pullquote reveal" style="margin-top: clamp(60px, 7vw, 100px);">«Sette–nove settimane per un sito che durerà dieci anni.»</div>
+  </div>
+</section>
+
+<!-- ============================= PERCHÉ FLAREO ============================= -->
+<section class="section">
+  <div class="wrap">
+    <div class="meta-row">
+      <span class="eyebrow">06 · Chi siamo</span>
+      <span class="eyebrow">Flareo Studio</span>
+      <span class="eyebrow">Quattro ragioni</span>
+    </div>
+    <h2 class="big reveal" style="margin-bottom: clamp(40px, 5vw, 80px);">Perché Flareo.</h2>
+
+    <div class="why-grid">
+      <div class="why-item reveal">
+        <span class="why-item__num">01</span>
+        <div class="why-item__title">Esecuzione<br>AI-powered</div>
+        <div class="why-item__text">Usiamo l'intelligenza artificiale per accelerare design, copywriting e testing. Velocità da agenzia moderna, senza compromessi sulla qualità. Tempi da startup, risultati da studio d'autore.</div>
+      </div>
+      <div class="why-item reveal">
+        <span class="why-item__num">02</span>
+        <div class="why-item__title">Prototipo<br>prima della firma</div>
+        <div class="why-item__text">Vi abbiamo già costruito 12 sezioni reali. Navigatele, criticatele, confrontatele con i vostri concorrenti in Val di Non. Poi decidete. Niente promesse vaghe, solo pagine che esistono già.</div>
+      </div>
+      <div class="why-item reveal">
+        <span class="why-item__num">03</span>
+        <div class="why-item__title">Un solo<br>interlocutore</div>
+        <div class="why-item__text">Design, sviluppo, SEO, deploy, copywriting. Un team, una visione, zero handoff confusi. Parlate con chi effettivamente costruisce il sito, non con un project manager.</div>
+      </div>
+      <div class="why-item reveal">
+        <span class="why-item__num">04</span>
+        <div class="why-item__title">Italiani,<br>come voi</div>
+        <div class="why-item__text">Parliamo la vostra lingua, capiamo il mercato trentino, conosciamo la differenza tra una caciotta di malga e un formaggio industriale. Nessun brief perso in traduzione, nessun fuso orario tra noi e voi.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= CTA FINALE ============================= -->
+<section class="section--tight">
+  <div class="wrap">
+    <div class="cta-block">
+      <h2 class="mega">Parliamone.</h2>
+      <p class="lead">Una proposta non chiude un progetto. Una conversazione sì. Raccontateci la vostra visione per il prossimo decennio della cooperativa, e costruiamola insieme.</p>
+      <a class="btn" href="mailto:flareo.agency@gmail.com?subject=Proposta Latteria · Rispondo">scrivici oggi <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================= FOOTER ============================= -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__mega reveal">Flareo<br>× Latteria.</div>
+
+    <div class="footer__top">
+      <div class="footer__col">
+        <h4>— Flareo Studio</h4>
+        <p style="font-size: 14px; color: var(--ink-soft); max-width: 36ch;">Studio di design e sviluppo AI-powered. Costruiamo siti editoriali per artigiani, cooperative e aziende italiane che hanno una storia da raccontare.</p>
+      </div>
+      <div class="footer__col">
+        <h4>— Contatti</h4>
+        <ul>
+          <li><a href="mailto:flareo.agency@gmail.com">flareo.agency@gmail.com</a></li>
+          <li><a href="https://flareo.studio" target="_blank">flareo.studio</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>— Proposta</h4>
+        <ul>
+          <li>Riferimento · Latteria-2026-01</li>
+          <li>Data · Aprile 2026</li>
+          <li>Validità · 30 giorni</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© 2026 Flareo Studio · Proposta riservata</span>
+      <span>Latteria Sociale di Fondo · Aprile 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 20) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
+
+// Reveal on scroll
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
