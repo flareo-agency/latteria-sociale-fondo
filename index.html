@@ -1,0 +1,1799 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Latteria Sociale di Fondo — Dal 1845, nel cuore della Val di Non</title>
+<meta name="description" content="Dal 1845 quaranta soci custodiscono il latte della Val di Non. Formaggi, caciotte, yogurt e Monte Mais Kofel: un caseificio di cooperativa tra le Dolomiti di Brenta." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  /* ============================================================
+     LATTERIA SOCIALE DI FONDO — DESIGN TOKENS
+     Editorial prototype inspired by ginivini.com graduating panels
+     ============================================================ */
+  :root {
+    /* Palette — cream → sand → stone → fern → ink */
+    --cream:      #F5EFE1;
+    --cream-soft: #EDE5D0;
+    --sand:       #E3DAC1;
+    --sage:       #CFD2BC;
+    --stone:      #B0A891;
+    --moss:       #7A8566;
+    --fern:       #4E5C3E;
+    --ink:        #1C1A14;
+    --ink-soft:   #2D2A22;
+    --butter:     #E8C66B;
+    --milk:       #FAF7EE;
+    --brick:      #8B4A32;
+
+    /* Type */
+    --display: "Fraunces", "Times New Roman", serif;
+    --body:    "Inter", -apple-system, "Segoe UI", sans-serif;
+
+    /* Scale */
+    --t-micro: clamp(11px, 0.72vw, 13px);
+    --t-small: clamp(13px, 0.86vw, 15px);
+    --t-body:  clamp(15px, 1.05vw, 18px);
+    --t-lead:  clamp(18px, 1.35vw, 22px);
+    --t-h3:    clamp(24px, 2.2vw, 36px);
+    --t-h2:    clamp(40px, 5.5vw, 88px);
+    --t-h1:    clamp(64px, 11vw, 184px);
+    --t-hero:  clamp(72px, 14vw, 220px);
+
+    /* Space */
+    --sp-1: 8px;
+    --sp-2: 16px;
+    --sp-3: 24px;
+    --sp-4: 40px;
+    --sp-5: 64px;
+    --sp-6: 96px;
+    --sp-7: 144px;
+    --sp-8: 200px;
+
+    /* Layout */
+    --gutter: clamp(20px, 4vw, 64px);
+    --maxw:   1560px;
+
+    /* Motion */
+    --ease: cubic-bezier(.22,.61,.36,1);
+    --t-fast: 260ms;
+    --t-med: 520ms;
+    --t-slow: 900ms;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body {
+    font-family: var(--body);
+    font-size: var(--t-body);
+    line-height: 1.55;
+    color: var(--ink);
+    background: var(--cream);
+    overflow-x: hidden;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+  /* ============================================================
+     TYPOGRAPHY PRIMITIVES
+     ============================================================ */
+  .display {
+    font-family: var(--display);
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings: "opsz" 144;
+    line-height: 0.86;
+    letter-spacing: -0.02em;
+  }
+  .eyebrow {
+    font-family: var(--body);
+    font-size: var(--t-micro);
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+  .lead {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: var(--t-lead);
+    line-height: 1.5;
+    font-style: italic;
+  }
+  .body-caps {
+    font-family: var(--body);
+    font-size: var(--t-small);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  em { font-style: italic; }
+
+  /* ============================================================
+     LAYOUT
+     ============================================================ */
+  .container {
+    width: 100%;
+    max-width: var(--maxw);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+  .grid-12 {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: clamp(16px, 2vw, 32px);
+  }
+  section { position: relative; }
+
+  /* ============================================================
+     NAV
+     ============================================================ */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: var(--sp-3) var(--gutter);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    mix-blend-mode: difference;
+    color: var(--cream);
+    transition: padding var(--t-fast) var(--ease);
+  }
+  .nav.scrolled { padding-block: 14px; }
+  .nav__brand {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+  .nav__brand span {
+    display: block;
+    font-family: var(--body);
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 3px;
+    opacity: 0.7;
+  }
+  .nav__menu {
+    display: flex;
+    gap: var(--sp-4);
+    align-items: center;
+  }
+  .nav__menu a {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+    position: relative;
+  }
+  .nav__menu a::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -4px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--t-fast) var(--ease);
+  }
+  .nav__menu a:hover::after { transform: scaleX(1); }
+  .nav__lang {
+    display: flex;
+    gap: 6px;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    font-weight: 500;
+  }
+  .nav__lang button {
+    padding: 4px 6px;
+    opacity: 0.5;
+    transition: opacity var(--t-fast);
+  }
+  .nav__lang button.active { opacity: 1; }
+  .nav__lang button:hover { opacity: 1; }
+  .nav__burger {
+    display: none;
+    width: 32px;
+    height: 22px;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .nav__burger span {
+    display: block;
+    height: 1px;
+    background: currentColor;
+  }
+
+  @media (max-width: 900px) {
+    .nav__menu, .nav__lang { display: none; }
+    .nav__burger { display: flex; }
+    .nav.open .nav__menu {
+      display: flex;
+      position: fixed;
+      inset: 0;
+      background: var(--ink);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: var(--sp-4);
+      font-size: 20px;
+    }
+  }
+
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .hero {
+    min-height: 100vh;
+    background: var(--ink);
+    color: var(--cream);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: var(--sp-5);
+    overflow: hidden;
+  }
+  .hero__media {
+    position: absolute;
+    inset: 0;
+    background: url("https://www.latteriasocialefondo.it/img/home_img/latteria-sociale-fondo-drone.jpg") center/cover;
+    opacity: 0.55;
+    filter: grayscale(0.35) contrast(1.05);
+    transform: scale(1.08);
+    animation: slowpush 24s var(--ease) infinite alternate;
+  }
+  @keyframes slowpush {
+    to { transform: scale(1); }
+  }
+  .hero__grad {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(28,26,20,0.55) 0%, rgba(28,26,20,0) 35%, rgba(28,26,20,0) 60%, rgba(28,26,20,0.85) 100%);
+  }
+  .hero__inner {
+    position: relative;
+    z-index: 2;
+  }
+  .hero__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    margin-bottom: var(--sp-4);
+    opacity: 0.85;
+  }
+  .hero__eyebrow::before {
+    content: "";
+    display: block;
+    width: 48px;
+    height: 1px;
+    background: currentColor;
+  }
+  .hero__title {
+    font-size: var(--t-hero);
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    line-height: 0.82;
+    text-transform: none;
+  }
+  .hero__title .line { display: block; }
+  .hero__title .line--r { text-align: right; font-style: italic; font-weight: 400; }
+  .hero__title .line--c { text-align: center; }
+  .hero__meta {
+    margin-top: var(--sp-5);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--sp-4);
+    flex-wrap: wrap;
+  }
+  .hero__coords {
+    font-family: var(--body);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.65;
+    line-height: 1.8;
+  }
+  .hero__tag {
+    max-width: 420px;
+    font-family: var(--display);
+    font-size: var(--t-lead);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.45;
+    opacity: 0.9;
+  }
+  .hero__scroll {
+    position: absolute;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%);
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
+    opacity: 0.6;
+    animation: pulse 2.6s var(--ease) infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: translateX(-50%) translateY(0); opacity: .4; }
+    50% { transform: translateX(-50%) translateY(6px); opacity: .9; }
+  }
+
+  /* ============================================================
+     PROLOGO
+     ============================================================ */
+  .prologo {
+    background: var(--cream);
+    padding: var(--sp-8) 0 var(--sp-7);
+  }
+  .prologo__grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--sp-6);
+    align-items: start;
+  }
+  .prologo__eye {
+    position: sticky;
+    top: 120px;
+  }
+  .prologo__body p {
+    font-family: var(--display);
+    font-size: clamp(22px, 2.2vw, 34px);
+    font-weight: 300;
+    line-height: 1.38;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--sp-4);
+    max-width: 28ch;
+  }
+  .prologo__body p em {
+    font-style: italic;
+    color: var(--fern);
+  }
+  .prologo__body p:last-child { margin-bottom: 0; }
+  @media (max-width: 800px) {
+    .prologo__grid { grid-template-columns: 1fr; gap: var(--sp-3); }
+    .prologo__eye { position: static; }
+  }
+
+  /* ============================================================
+     STORIA — 1845
+     ============================================================ */
+  .storia {
+    background: var(--cream-soft);
+    padding: var(--sp-7) 0;
+    position: relative;
+  }
+  .storia__label {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: var(--sp-5);
+  }
+  .storia__title {
+    font-size: var(--t-h1);
+    line-height: 0.82;
+    font-weight: 300;
+    letter-spacing: -0.035em;
+  }
+  .storia__title em {
+    font-style: italic;
+    font-weight: 400;
+    display: block;
+    color: var(--fern);
+  }
+  .storia__grid {
+    margin-top: var(--sp-6);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--sp-4);
+  }
+  .timeline-card {
+    padding: var(--sp-4) var(--sp-3);
+    border-top: 1px solid var(--ink);
+    position: relative;
+  }
+  .timeline-card__year {
+    font-family: var(--display);
+    font-size: clamp(32px, 3vw, 48px);
+    font-weight: 300;
+    margin-bottom: var(--sp-2);
+    line-height: 1;
+  }
+  .timeline-card__text {
+    font-size: var(--t-small);
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  .storia__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-4);
+    margin-top: var(--sp-6);
+    padding-top: var(--sp-5);
+    border-top: 1px solid var(--stone);
+  }
+  .stat__num {
+    font-family: var(--display);
+    font-size: clamp(56px, 6vw, 120px);
+    font-weight: 300;
+    line-height: 0.9;
+    color: var(--fern);
+    letter-spacing: -0.03em;
+  }
+  .stat__label {
+    margin-top: var(--sp-2);
+    font-size: var(--t-small);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+  @media (max-width: 800px) {
+    .storia__grid { grid-template-columns: repeat(2, 1fr); }
+    .storia__stats { grid-template-columns: 1fr; }
+  }
+
+  /* ============================================================
+     MONTE MAIS KOFEL — editorial chapter
+     ============================================================ */
+  .kofel {
+    background: var(--ink);
+    color: var(--cream);
+    padding: var(--sp-7) 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .kofel__bg {
+    position: absolute;
+    inset: 0;
+    background: url("https://www.latteriasocialefondo.it/img/territorio/territtorio-val-di-non.jpg") center/cover;
+    opacity: 0.12;
+    filter: grayscale(1) contrast(1.2);
+  }
+  .kofel__inner {
+    position: relative;
+    z-index: 2;
+  }
+  .kofel__meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--body);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: var(--sp-5);
+    border-top: 1px solid rgba(245,239,225,0.2);
+    padding-top: var(--sp-3);
+  }
+  .kofel__title {
+    font-size: clamp(48px, 9vw, 160px);
+    font-weight: 300;
+    line-height: 0.86;
+    letter-spacing: -0.03em;
+  }
+  .kofel__title em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--butter);
+  }
+  .kofel__body {
+    margin-top: var(--sp-6);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-6);
+  }
+  .kofel__body p {
+    font-family: var(--display);
+    font-size: clamp(17px, 1.3vw, 21px);
+    font-weight: 300;
+    line-height: 1.65;
+    opacity: 0.88;
+    margin-bottom: var(--sp-3);
+  }
+  .kofel__pullquote {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: clamp(24px, 2.4vw, 40px);
+    font-weight: 300;
+    line-height: 1.3;
+    padding: var(--sp-4) 0 var(--sp-4) var(--sp-4);
+    border-left: 2px solid var(--butter);
+    color: var(--cream);
+    margin: var(--sp-4) 0;
+  }
+  .kofel__facts {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--sp-3);
+    margin-top: var(--sp-6);
+    padding-top: var(--sp-4);
+    border-top: 1px solid rgba(245,239,225,0.2);
+  }
+  .kofel__fact strong {
+    display: block;
+    font-family: var(--display);
+    font-size: clamp(28px, 2.6vw, 44px);
+    font-weight: 300;
+    color: var(--butter);
+    margin-bottom: var(--sp-1);
+  }
+  .kofel__fact span {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.65;
+  }
+  @media (max-width: 800px) {
+    .kofel__body, .kofel__facts { grid-template-columns: 1fr; }
+  }
+
+  /* ============================================================
+     CAPITOLI — graduating product panels (à la Ginivini)
+     ============================================================ */
+  .capitolo {
+    padding: var(--sp-7) 0 var(--sp-8);
+    position: relative;
+  }
+  .capitolo--1 { background: #FCF7E8; }
+  .capitolo--2 { background: #E3DAC1; }
+  .capitolo--3 { background: #CFC8AC; }
+  .capitolo--4 { background: #B0A891; color: var(--ink); }
+
+  .capitolo__head {
+    text-align: center;
+    margin-bottom: var(--sp-6);
+  }
+  .capitolo__num {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin-bottom: var(--sp-3);
+    opacity: 0.6;
+  }
+  .capitolo__title {
+    font-size: clamp(52px, 8vw, 144px);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -0.025em;
+  }
+  .capitolo__title em {
+    font-style: italic;
+    color: var(--fern);
+  }
+  .capitolo__kicker {
+    margin-top: var(--sp-3);
+    font-family: var(--body);
+    font-size: var(--t-small);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+  .capitolo__intro {
+    max-width: 60ch;
+    margin: var(--sp-5) auto 0;
+    text-align: center;
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(18px, 1.4vw, 24px);
+    line-height: 1.55;
+    font-style: italic;
+  }
+
+  .products {
+    margin-top: var(--sp-6);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-4);
+  }
+  .product {
+    position: relative;
+  }
+  .product__media {
+    aspect-ratio: 3/4;
+    background: rgba(0,0,0,0.04);
+    overflow: hidden;
+    position: relative;
+  }
+  .product__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--t-slow) var(--ease);
+  }
+  .product:hover .product__media img { transform: scale(1.04); }
+  .product__num {
+    position: absolute;
+    top: var(--sp-2); left: var(--sp-2);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.75);
+    padding: 4px 8px;
+    backdrop-filter: blur(6px);
+  }
+  .product__body {
+    padding: var(--sp-3) 0 0;
+  }
+  .product__name {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(22px, 1.8vw, 30px);
+    line-height: 1.1;
+    margin-bottom: var(--sp-1);
+  }
+  .product__tag {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.65;
+  }
+  .product__desc {
+    margin-top: var(--sp-2);
+    font-size: var(--t-small);
+    line-height: 1.5;
+    opacity: 0.85;
+    max-width: 32ch;
+  }
+  @media (max-width: 900px) {
+    .products { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .products { grid-template-columns: 1fr; }
+  }
+
+  /* ============================================================
+     TERRITORIO
+     ============================================================ */
+  .territorio {
+    background: var(--fern);
+    color: var(--cream);
+    padding: var(--sp-7) 0;
+  }
+  .territorio__grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: var(--sp-6);
+    align-items: center;
+  }
+  .territorio__title {
+    font-size: clamp(48px, 7vw, 120px);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -0.025em;
+    margin-bottom: var(--sp-4);
+  }
+  .territorio__title em {
+    font-style: italic;
+    color: var(--butter);
+  }
+  .territorio__body p {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(17px, 1.2vw, 20px);
+    line-height: 1.65;
+    margin-bottom: var(--sp-3);
+    opacity: 0.9;
+  }
+  .territorio__media {
+    aspect-ratio: 4/5;
+    background: url("https://www.latteriasocialefondo.it/img/territorio/territtorio-val-di-non.jpg") center/cover;
+    filter: saturate(0.8) contrast(1.05);
+  }
+  .territorio__marks {
+    margin-top: var(--sp-5);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-3);
+    padding-top: var(--sp-4);
+    border-top: 1px solid rgba(245,239,225,0.25);
+  }
+  .mark strong {
+    display: block;
+    font-family: var(--display);
+    font-size: clamp(20px, 1.6vw, 26px);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--butter);
+    margin-bottom: 4px;
+  }
+  .mark span {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+  @media (max-width: 800px) {
+    .territorio__grid { grid-template-columns: 1fr; }
+  }
+
+  /* ============================================================
+     VALORI
+     ============================================================ */
+  .valori {
+    background: var(--milk);
+    padding: var(--sp-7) 0;
+  }
+  .valori__head {
+    margin-bottom: var(--sp-6);
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+  }
+  .valori__title {
+    font-size: clamp(42px, 6vw, 104px);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -0.025em;
+  }
+  .valori__title em {
+    font-style: italic;
+    color: var(--fern);
+  }
+  .valori__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--sp-4);
+  }
+  .valore {
+    padding: var(--sp-4) 0;
+    border-top: 1px solid var(--ink);
+    position: relative;
+  }
+  .valore__num {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: var(--t-small);
+    color: var(--fern);
+    margin-bottom: var(--sp-2);
+  }
+  .valore__name {
+    font-family: var(--display);
+    font-size: clamp(24px, 2.2vw, 36px);
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: var(--sp-2);
+  }
+  .valore__desc {
+    font-size: var(--t-small);
+    line-height: 1.55;
+    opacity: 0.8;
+  }
+  @media (max-width: 800px) {
+    .valori__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 520px) {
+    .valori__grid { grid-template-columns: 1fr; }
+  }
+
+  /* ============================================================
+     VISITA
+     ============================================================ */
+  .visita {
+    background: var(--ink);
+    color: var(--cream);
+    padding: var(--sp-7) 0;
+    text-align: center;
+  }
+  .visita__eye { margin-bottom: var(--sp-3); opacity: 0.7; }
+  .visita__title {
+    font-size: clamp(48px, 8vw, 140px);
+    font-weight: 300;
+    line-height: 0.88;
+    letter-spacing: -0.03em;
+  }
+  .visita__title em {
+    font-style: italic;
+    color: var(--butter);
+    display: block;
+  }
+  .visita__body {
+    max-width: 58ch;
+    margin: var(--sp-4) auto;
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(17px, 1.25vw, 22px);
+    line-height: 1.55;
+    opacity: 0.88;
+  }
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 36px;
+    margin-top: var(--sp-3);
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+  }
+  .cta:hover { background: var(--butter); color: var(--ink); border-color: var(--butter); }
+  .cta__arrow {
+    display: inline-block;
+    transition: transform var(--t-fast) var(--ease);
+  }
+  .cta:hover .cta__arrow { transform: translateX(4px); }
+
+  /* ============================================================
+     PUNTI VENDITA
+     ============================================================ */
+  .vendita {
+    background: var(--cream);
+    padding: var(--sp-7) 0;
+  }
+  .vendita__head { margin-bottom: var(--sp-5); }
+  .vendita__title {
+    font-size: clamp(44px, 6.5vw, 112px);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -0.025em;
+  }
+  .vendita__title em {
+    font-style: italic;
+    color: var(--fern);
+  }
+  .vendita__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-5);
+  }
+  .store {
+    border-top: 1px solid var(--ink);
+    padding-top: var(--sp-4);
+  }
+  .store__name {
+    font-family: var(--display);
+    font-size: clamp(28px, 2.6vw, 44px);
+    font-weight: 400;
+    margin-bottom: var(--sp-2);
+  }
+  .store__name em { font-style: italic; color: var(--fern); }
+  .store__addr {
+    font-size: var(--t-small);
+    line-height: 1.55;
+    margin-bottom: var(--sp-3);
+    opacity: 0.85;
+  }
+  .store__hours {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6px var(--sp-3);
+    font-size: var(--t-small);
+    padding-top: var(--sp-3);
+    border-top: 1px solid var(--sand);
+  }
+  .store__hours dt {
+    font-weight: 500;
+    color: var(--fern);
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+  }
+  @media (max-width: 800px) {
+    .vendita__grid { grid-template-columns: 1fr; }
+  }
+
+  /* ============================================================
+     CONTATTI — form
+     ============================================================ */
+  .contatti {
+    background: var(--sand);
+    padding: var(--sp-7) 0;
+  }
+  .contatti__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: var(--sp-6);
+    align-items: start;
+  }
+  .contatti__title {
+    font-size: clamp(44px, 6.5vw, 112px);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -0.025em;
+    margin-bottom: var(--sp-4);
+  }
+  .contatti__title em { font-style: italic; color: var(--fern); }
+  .contatti__info {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(17px, 1.25vw, 20px);
+    line-height: 1.6;
+  }
+  .contatti__info a {
+    display: block;
+    border-bottom: 1px solid var(--ink);
+    padding: 6px 0;
+    margin: var(--sp-2) 0;
+    transition: padding var(--t-fast) var(--ease);
+  }
+  .contatti__info a:hover { padding-left: 10px; }
+
+  .form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-3) var(--sp-4);
+  }
+  .form__group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .form__group--full { grid-column: 1 / -1; }
+  .form__label {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--ink-soft);
+  }
+  .form__input, .form__textarea {
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--ink);
+    padding: 10px 0;
+    font: inherit;
+    color: var(--ink);
+    outline: none;
+    transition: border-color var(--t-fast);
+  }
+  .form__input:focus, .form__textarea:focus { border-color: var(--fern); }
+  .form__textarea { resize: vertical; min-height: 90px; }
+  .form__privacy {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: var(--sp-2);
+    align-items: flex-start;
+    font-size: 12px;
+    line-height: 1.5;
+    opacity: 0.85;
+  }
+  .form__submit {
+    grid-column: 1 / -1;
+    margin-top: var(--sp-3);
+    padding: 18px 36px;
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: 999px;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+    justify-self: start;
+    transition: background var(--t-fast) var(--ease);
+  }
+  .form__submit:hover { background: var(--fern); }
+  .form__error { color: var(--brick); font-size: 12px; }
+  .form__success {
+    grid-column: 1 / -1;
+    padding: var(--sp-3);
+    background: var(--fern);
+    color: var(--cream);
+    font-size: var(--t-small);
+    display: none;
+  }
+  .form.sent .form__success { display: block; }
+  @media (max-width: 800px) {
+    .contatti__grid, .form { grid-template-columns: 1fr; }
+  }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  .footer {
+    background: var(--ink);
+    color: var(--cream);
+    padding: var(--sp-6) 0 var(--sp-4);
+  }
+  .footer__top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: var(--sp-4);
+    padding-bottom: var(--sp-5);
+    border-bottom: 1px solid rgba(245,239,225,0.18);
+  }
+  .footer__brand {
+    font-family: var(--display);
+    font-size: clamp(28px, 3vw, 48px);
+    font-weight: 300;
+    line-height: 0.95;
+    max-width: 16ch;
+  }
+  .footer__brand em { font-style: italic; color: var(--butter); }
+  .footer__col h4 {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 500;
+    opacity: 0.6;
+    margin-bottom: var(--sp-2);
+  }
+  .footer__col ul { list-style: none; }
+  .footer__col li {
+    font-size: var(--t-small);
+    padding: 4px 0;
+    opacity: 0.85;
+  }
+  .footer__col a:hover { color: var(--butter); }
+  .footer__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--sp-3);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    opacity: 0.5;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+  }
+  .footer__psr {
+    display: flex;
+    gap: var(--sp-3);
+    align-items: center;
+    margin-top: var(--sp-4);
+    opacity: 0.7;
+  }
+  .footer__psr img { height: 40px; width: auto; filter: brightness(0) invert(1); }
+  @media (max-width: 800px) {
+    .footer__top { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ============================================================
+     REVEAL ANIMATIONS
+     ============================================================ */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity var(--t-slow) var(--ease), transform var(--t-slow) var(--ease);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
+  .reveal--1 { transition-delay: 60ms; }
+  .reveal--2 { transition-delay: 120ms; }
+  .reveal--3 { transition-delay: 180ms; }
+  .reveal--4 { transition-delay: 240ms; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<nav class="nav" id="nav">
+  <a href="#top" class="nav__brand">
+    Latteria Sociale di Fondo
+    <span>Dal 1845</span>
+  </a>
+  <div class="nav__menu">
+    <a href="#storia">Storia</a>
+    <a href="#kofel">Monte Mais Kofel</a>
+    <a href="#formaggi">Formaggi</a>
+    <a href="#territorio">Territorio</a>
+    <a href="#visita">Visita</a>
+    <a href="#vendita">Punti vendita</a>
+    <a href="#contatti">Contatti</a>
+  </div>
+  <div class="nav__lang">
+    <button class="active" data-lang="it">IT</button>
+    <button data-lang="de">DE</button>
+    <button data-lang="en">EN</button>
+  </div>
+  <button class="nav__burger" aria-label="Menu" id="burger">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<header class="hero" id="top">
+  <div class="hero__media"></div>
+  <div class="hero__grad"></div>
+  <div class="hero__inner container">
+    <div class="hero__eyebrow body-caps">Dal 1845 &nbsp;·&nbsp; Val di Non &nbsp;·&nbsp; Trentino</div>
+    <h1 class="hero__title display reveal">
+      <span class="line">Latteria</span>
+      <span class="line line--c">Sociale</span>
+      <span class="line line--r"><em>di Fondo</em></span>
+    </h1>
+    <div class="hero__meta">
+      <div class="hero__coords">
+        46°26′ N &nbsp;·&nbsp; 11°08′ E<br/>
+        987 m s.l.m.<br/>
+        Dolomiti di Brenta
+      </div>
+      <p class="hero__tag">
+        Una cooperativa di quaranta soci che da oltre centosettant'anni trasforma il latte dei pascoli d'alta quota in formaggi, yogurt e caciotte.
+      </p>
+    </div>
+  </div>
+  <div class="hero__scroll">scorri</div>
+</header>
+
+<!-- ============================================================
+     PROLOGO
+     ============================================================ -->
+<section class="prologo">
+  <div class="container">
+    <div class="prologo__grid">
+      <div class="prologo__eye">
+        <span class="eyebrow">Prologo</span>
+      </div>
+      <div class="prologo__body">
+        <p class="reveal">Ci sono luoghi in cui il tempo si misura <em>nella lentezza del latte</em> che diventa formaggio.</p>
+        <p class="reveal reveal--1">La Val di Non è uno di questi. Qui, tra i meleti fioriti e i pascoli delle Maddalene, quaranta famiglie di soci conferiscono ogni giorno il proprio latte alla Latteria Sociale di Fondo.</p>
+        <p class="reveal reveal--2">Dal 1845 custodiamo un gesto semplice: prendere il meglio di questa terra e restituirlo in forma di cibo vero.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     STORIA — 1845
+     ============================================================ -->
+<section class="storia" id="storia">
+  <div class="container">
+    <div class="storia__label">
+      <span class="eyebrow">La nostra storia</span>
+      <span class="eyebrow">001 / VII</span>
+    </div>
+    <h2 class="storia__title display reveal">
+      Centosettant'anni<br/>
+      <em>di cooperazione</em>
+    </h2>
+    <div class="storia__grid">
+      <div class="timeline-card reveal">
+        <div class="timeline-card__year">1845</div>
+        <p class="timeline-card__text">Nasce la Latteria Sociale di Fondo, fra le prime cooperative casearie del Trentino. I contadini della Val di Non si uniscono per trasformare insieme il latte.</p>
+      </div>
+      <div class="timeline-card reveal reveal--1">
+        <div class="timeline-card__year">1950</div>
+        <p class="timeline-card__text">Gli anni del dopoguerra consolidano la tradizione: la latteria diventa il cuore economico e sociale del paese, punto di riferimento per i produttori della valle.</p>
+      </div>
+      <div class="timeline-card reveal reveal--2">
+        <div class="timeline-card__year">2000</div>
+        <p class="timeline-card__text">Il caseificio viene ricostruito da zero: nuove tecnologie, nuovi standard di igiene, ma lo stesso metodo artigianale tramandato dai maestri casari.</p>
+      </div>
+      <div class="timeline-card reveal reveal--3">
+        <div class="timeline-card__year">2010</div>
+        <p class="timeline-card__text">Riapre Malga Kofel sul Passo della Mendola. Rinasce un formaggio dimenticato: il Monte Mais Kofel, a quota 1480 metri.</p>
+      </div>
+    </div>
+    <div class="storia__stats">
+      <div class="stat reveal">
+        <div class="stat__num">180<sup>+</sup></div>
+        <div class="stat__label">Anni di storia</div>
+      </div>
+      <div class="stat reveal reveal--1">
+        <div class="stat__num">40</div>
+        <div class="stat__label">Soci conferitori</div>
+      </div>
+      <div class="stat reveal reveal--2">
+        <div class="stat__num">10</div>
+        <div class="stat__label">Dipendenti</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MONTE MAIS KOFEL
+     ============================================================ -->
+<section class="kofel" id="kofel">
+  <div class="kofel__bg"></div>
+  <div class="kofel__inner container">
+    <div class="kofel__meta">
+      <span>Capitolo speciale</span>
+      <span>Passo della Mendola · 1480 m</span>
+    </div>
+    <h2 class="kofel__title display reveal">
+      Monte Mais<br/>
+      <em>Kofel</em>
+    </h2>
+    <div class="kofel__body">
+      <div>
+        <p class="reveal">C'è un formaggio che ha saputo attraversare due guerre mondiali e riemergere intatto dalla memoria delle montagne.</p>
+        <p class="reveal reveal--1">Sul Passo della Mendola, a 1480 metri di quota, si trova la Malga Kofel — un luogo che durante il primo e il secondo conflitto mondiale ospitò il Bunker Gampen, postazione strategica delle Dolomiti.</p>
+        <p class="reveal reveal--2">Per decenni la malga è rimasta in silenzio, fino al 2010. Allora la Latteria Sociale di Fondo ha deciso di riaprirla e di far rinascere un metodo caseario antico: il latte d'alpeggio, le erbe d'alta quota, la stagionatura lenta nelle cantine in pietra.</p>
+      </div>
+      <div>
+        <div class="kofel__pullquote reveal">
+          «Il Monte Mais Kofel è un formaggio che racconta le cime, il legno, il silenzio. È la voce del nostro territorio messa in forma.»
+        </div>
+        <p class="reveal reveal--1">Ogni forma è il frutto di un'estate intera passata in malga, di mani esperte e di una scelta radicale: produrre solo ciò che la montagna può davvero offrire.</p>
+      </div>
+    </div>
+    <div class="kofel__facts">
+      <div class="kofel__fact reveal">
+        <strong>1480 m</strong>
+        <span>Altitudine malga</span>
+      </div>
+      <div class="kofel__fact reveal reveal--1">
+        <strong>2010</strong>
+        <span>Anno di riapertura</span>
+      </div>
+      <div class="kofel__fact reveal reveal--2">
+        <strong>90 gg</strong>
+        <span>Stagionatura media</span>
+      </div>
+      <div class="kofel__fact reveal reveal--3">
+        <strong>1×</strong>
+        <span>Produzione annuale</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CAPITOLO UNO — I NOSTRANI
+     ============================================================ -->
+<section class="capitolo capitolo--1" id="formaggi">
+  <div class="container">
+    <div class="capitolo__head">
+      <span class="capitolo__num">Capitolo Uno</span>
+      <h2 class="capitolo__title display reveal">I <em>Nostrani</em></h2>
+      <div class="capitolo__kicker">Il cuore della tradizione</div>
+      <p class="capitolo__intro reveal">Il formaggio di casa. Quello che fa il paese, che racconta la valle, che matura nelle cantine di Fondo e cambia voce con il passare dei mesi.</p>
+    </div>
+    <div class="products">
+      <article class="product reveal">
+        <div class="product__media">
+          <span class="product__num">N° 01</span>
+          <img src="https://www.latteriasocialefondo.it/img/prodotti-galleria/formaggio-nostrano-fresco.jpg" alt="Formaggio Nostrano Fresco" loading="lazy" />
+        </div>
+        <div class="product__body">
+          <h3 class="product__name">Nostrano Fresco</h3>
+          <div class="product__tag">20–40 giorni</div>
+          <p class="product__desc">Pasta morbida, crosta sottile, sapore delicato di latte e fieno appena tagliato.</p>
+        </div>
+      </article>
+      <article class="product reveal reveal--1">
+        <div class="product__media">
+          <span class="product__num">N° 02</span>
+          <img src="https://www.latteriasocialefondo.it/img/prodotti-galleria/formaggio-nostrano-mezzano.jpg" alt="Formaggio Nostrano Mezzano" loading="lazy" />
+        </div>
+        <div class="product__body">
+          <h3 class="product__name">Nostrano Mezzano</h3>
+          <div class="product__tag">3–6 mesi</div>
+          <p class="product__desc">Il punto d'equilibrio: la dolcezza del fresco e i primi accenti di stagionatura.</p>
+        </div>
+      </article>
+      <article class="product reveal reveal--2">
+        <div class="product__media">
+          <span class="product__num">N° 03</span>
+          <img src="https://www.latteriasocialefondo.it/img/prodotti-galleria/formaggio-nostrano-vecchio.jpg" alt="Formaggio Nostrano Vecchio" loading="lazy" />
+        </div>
+        <div class="product__body">
+          <h3 class="product__name">Nostrano Vecchio</h3>
+          <div class="product__tag">Oltre 12 mesi</div>
+          <p class="product__desc">Intenso, granuloso, pieno. Un formaggio che parla piano, con la voce bassa del tempo.</p>
+        </div>
+      </article>
+      <article class="product reveal reveal--3">
+        <div class="product__media">
+          <span class="product__num">N° 04</span>
+          <img src="https://www.latteriasocialefondo.it/img/prodotti-galleria/formaggio-fuso-da-fon.jpg" alt="Formaggio Fuso da Fon" loading="lazy" />
+        </div>
+        <div class="product__body">
+          <h3 class="product__name">Fuso "da Fon"</h3>
+          <div class="product__tag">Cremoso · spalmabile</div>
+          <p class="product__desc">Il nostro formaggio fuso, la merenda d'infanzia dei bambini della Val di Non.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CAPITOLO DUE — LE CACIOTTE
+     ============================================================ -->
+<section class="capitolo capitolo--2">
+  <div class="container">
+    <div class="capitolo__head">
+      <span class="capitolo__num">Capitolo Due</span>
+      <h2 class="capitolo__title display reveal">Le <em>Caciotte</em></h2>
+      <div class="capitolo__kicker">Nove variazioni su un tema</div>
+      <p class="capitolo__intro reveal">Piccole forme da tavola, nate per essere divise. Ognuna racconta un'erba, una spezia, un frutto del bosco.</p>
+    </div>
+    <div class="products">
+      <article class="product reveal">
+        <div class="product__media">
+          <span class="product__num">N° 05</span>
+          <img src="https://www.latteriasocialefondo.it/img/prodotti-galleria/caciotta-bianca.jpg" alt="Caciotta Bianca" loading="lazy" />
+        </div>
+        <div class="product__body">
+          <h3 class="product__name">Caciotta Bianca</h3>
+          <div class="product__tag">Il classico</div>
+        </div>
+      </article>
+      <article class="product reveal reveal--1">
+        <div class="product__media">
+          <span class="product__num">N° 06</span>
+          <img src="https://www.latteriasocialefondo.it/img/prodotti-galleria/caciotta-erba-cipollina.jpg" alt="Caciotta all'Erba Cipollina" loading="lazy" />
+        </div>
+        <div class="product__body">
+          <h3 class="product__name">Erba Cipollina</h3>
+          <div class="product__tag">Fresca &middot; aromatica</div>
+        </div>
+      </article>
+      <article class="product reveal reveal--2">
+        <div class="product__media">
+          <span class="product__num">N° 07</span>
+          <img src="https://www.latteriasocialefondo.it/img/prodotti-galleria/caciotta-ai-fiori.jpg" alt="Caciotta ai Fiori" loading="lazy" />
+        </div>
+        <div class="product__body">
+          <h3 class="product__name">Ai Fiori</h3>
+          <div class="product__tag">Petali di montagna</div>
+        </div>
+      </article>
+      <article class="product reveal">
+        <div class="product__media">
+          <span class="product__num">N° 08</span>
+          <img src="https://www.latteriasocialefondo.it/img/prodotti-galleria/caciotta-al-pepe.jpg" alt="Caciotta al Pepe" loading="lazy" />
+        </div>
+        <div class="product__body">
+          <h3 class="product__name">Al Pepe</h3>
+          <div class="product__tag">Nero · intenso</div>
+        </div>
+      </article>
+      <article class="product reveal reveal--1">
+        <div class="product__media">
+          <span class="product__num">N° 09</span>
+          <img src="https://www.latteriasocialefondo.it/img/prodotti-galleria/caciotta-alle-noci.jpg" alt="Caciotta alle Noci" loading="lazy" />
+        </div>
+        <div class="product__body">
+          <h3 class="product__name">Alle Noci</h3>
+          <div class="product__tag">Autunnale</div>
+        </div>
+      </article>
+      <article class="product reveal reveal--2">
+        <div class="product__media">
+          <span class="product__num">N° 10</span>
+          <img src="https://www.latteriasocialefondo.it/img/prodotti-galleria/caciotta-al-cumino.jpg" alt="Caciotta al Cumino" loading="lazy" />
+        </div>
+        <div class="product__body">
+          <h3 class="product__name">Al Cumino</h3>
+          <div class="product__tag">Speziata · tirolese</div>
+        </div>
+      </article>
+      <article class="product reveal">
+        <div class="product__media">
+          <span class="product__num">N° 11</span>
+          <img src="https://www.latteriasocialefondo.it/img/prodotti-galleria/caciotta-al-peperoncino.jpg" alt="Caciotta al Peperoncino" loading="lazy" />
+        </div>
+        <div class="product__body">
+          <h3 class="product__name">Al Peperoncino</h3>
+          <div class="product__tag">Piccante · deciso</div>
+        </div>
+      </article>
+      <article class="product reveal reveal--1">
+        <div class="product__media">
+          <span class="product__num">N° 12</span>
+          <img src="https://www.latteriasocialefondo.it/img/prodotti-galleria/caciotta-senza-lattosio.jpg" alt="Caciotta Senza Lattosio" loading="lazy" />
+        </div>
+        <div class="product__body">
+          <h3 class="product__name">Senza Lattosio</h3>
+          <div class="product__tag">Per tutti</div>
+        </div>
+      </article>
+      <article class="product reveal reveal--2">
+        <div class="product__media">
+          <span class="product__num">N° 13</span>
+          <img src="https://www.latteriasocialefondo.it/img/prodotti-galleria/capricciotta.jpg" alt="Capricciotta" loading="lazy" />
+        </div>
+        <div class="product__body">
+          <h3 class="product__name">Capricciotta</h3>
+          <div class="product__tag">La piccola</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CAPITOLO TRE — LE SPECIALITÀ
+     ============================================================ -->
+<section class="capitolo capitolo--3">
+  <div class="container">
+    <div class="capitolo__head">
+      <span class="capitolo__num">Capitolo Tre</span>
+      <h2 class="capitolo__title display reveal">Le <em>Specialità</em></h2>
+      <div class="capitolo__kicker">Cinque gesti d'autore</div>
+      <p class="capitolo__intro reveal">Formaggi nati da ricette pensate, da stagionature scelte, da un'idea precisa di gusto. Sono i nostri piccoli esperimenti di famiglia.</p>
+    </div>
+    <div class="products">
+      <article class="product reveal">
+        <div class="product__media">
+          <span class="product__num">N° 14</span>
+          <img src="https://www.latteriasocialefondo.it/img/prodotti-galleria/smeraldo.jpg" alt="Smeraldo" loading="lazy" />
+        </div>
+        <div class="product__body">
+          <h3 class="product__name">Smeraldo</h3>
+          <div class="product__tag">Verde · erbaceo</div>
+          <p class="product__desc">Una gemma di pasta molle dal colore inconfondibile, con note di erbe alpine.</p>
+        </div>
+      </article>
+      <article class="product reveal reveal--1">
+        <div class="product__media">
+          <span class="product__num">N° 15</span>
+          <img src="https://www.latteriasocialefondo.it/img/prodotti-galleria/ciaselot.jpg" alt="Ciaselot" loading="lazy" />
+        </div>
+        <div class="product__body">
+          <h3 class="product__name">Ciaselot</h3>
+          <div class="product__tag">Morbido · rotondo</div>
+          <p class="product__desc">Il formaggio piccolo, dalla pasta cedevole, che si mangia in un sol boccone.</p>
+        </div>
+      </article>
+      <article class="product reveal reveal--2">
+        <div class="product__media">
+          <span class="product__num">N° 16</span>
+          <img src="https://www.latteriasocialefondo.it/img/prodotti-galleria/fontal.jpg" alt="Fontal" loading="lazy" />
+        </div>
+        <div class="product__body">
+          <h3 class="product__name">Fontal</h3>
+          <div class="product__tag">Dolce · fondente</div>
+          <p class="product__desc">La pasta lunga e filante del Fontal, perfetta per fondute e raclette d'inverno.</p>
+        </div>
+      </article>
+      <article class="product reveal">
+        <div class="product__media">
+          <span class="product__num">N° 17</span>
+          <img src="https://www.latteriasocialefondo.it/img/prodotti-galleria/caprino-fresco-di-fondo.jpg" alt="Caprino Fresco di Fondo" loading="lazy" />
+        </div>
+        <div class="product__body">
+          <h3 class="product__name">Caprino di Fondo</h3>
+          <div class="product__tag">Latte caprino</div>
+          <p class="product__desc">Fresco, spumoso, pulito: l'incontro tra il latte delle capre e le nostre cantine.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CAPITOLO QUATTRO — YOGURT & PANNA
+     ============================================================ -->
+<section class="capitolo capitolo--4">
+  <div class="container">
+    <div class="capitolo__head">
+      <span class="capitolo__num">Capitolo Quattro</span>
+      <h2 class="capitolo__title display reveal">Yogurt &amp; <em>Panna</em></h2>
+      <div class="capitolo__kicker">La dolcezza quotidiana</div>
+      <p class="capitolo__intro reveal">Quando il latte non si fa formaggio, diventa colazione, merenda, dessert. Semplice, cremoso, pieno della valle.</p>
+    </div>
+    <div class="products">
+      <article class="product reveal">
+        <div class="product__media">
+          <span class="product__num">N° 18</span>
+          <img src="https://www.latteriasocialefondo.it/img/prodotti-galleria/yogurt-da-fon-1-kg.jpg" alt="Yogurt da Fon 1 kg" loading="lazy" />
+        </div>
+        <div class="product__body">
+          <h3 class="product__name">Yogurt da Fon · 1 kg</h3>
+          <div class="product__tag">Famiglia</div>
+          <p class="product__desc">Il formato grande, per chi lo vuole a colazione e alla sera.</p>
+        </div>
+      </article>
+      <article class="product reveal reveal--1">
+        <div class="product__media">
+          <span class="product__num">N° 19</span>
+          <img src="https://www.latteriasocialefondo.it/img/prodotti-galleria/yogurt-da-fon-150-g.jpg" alt="Yogurt da Fon 150 g" loading="lazy" />
+        </div>
+        <div class="product__body">
+          <h3 class="product__name">Yogurt da Fon · 150 g</h3>
+          <div class="product__tag">Monoporzione</div>
+          <p class="product__desc">Il vasetto singolo, perfetto per la merenda o da portare in ufficio.</p>
+        </div>
+      </article>
+      <article class="product reveal reveal--2">
+        <div class="product__media">
+          <span class="product__num">N° 20</span>
+          <img src="https://www.latteriasocialefondo.it/img/prodotti-galleria/panna-cotta-da-fon.jpg" alt="Panna cotta da Fon" loading="lazy" />
+        </div>
+        <div class="product__body">
+          <h3 class="product__name">Panna cotta da Fon</h3>
+          <div class="product__tag">Dessert pronto</div>
+          <p class="product__desc">La nostra panna cotta, pronta da servire. Delicata, vellutata, tradizionale.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TERRITORIO
+     ============================================================ -->
+<section class="territorio" id="territorio">
+  <div class="container">
+    <div class="territorio__grid">
+      <div>
+        <span class="eyebrow" style="color:var(--butter)">Il territorio</span>
+        <h2 class="territorio__title display reveal">Val di Non,<br/><em>il nostro respiro</em></h2>
+        <div class="territorio__body">
+          <p class="reveal">Siamo incastonati tra le Dolomiti di Brenta — patrimonio UNESCO — le Maddalene e la catena della Paganella. È questa geografia a decidere il sapore del latte che riceviamo ogni mattina.</p>
+          <p class="reveal reveal--1">I pascoli d'estate salgono oltre i 1500 metri, tra erbe aromatiche che nessuna pianura può imitare. L'aria fredda di notte, il sole delle Alpi di giorno: così nascono le nostre forme.</p>
+        </div>
+        <div class="territorio__marks">
+          <div class="mark reveal"><strong>Dolomiti di Brenta</strong><span>Patrimonio UNESCO</span></div>
+          <div class="mark reveal reveal--1"><strong>Le Maddalene</strong><span>Catena alpina</span></div>
+          <div class="mark reveal reveal--2"><strong>Paganella</strong><span>Altopiano</span></div>
+          <div class="mark reveal reveal--3"><strong>987 m s.l.m.</strong><span>Il nostro paese</span></div>
+        </div>
+      </div>
+      <div class="territorio__media reveal" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     VALORI
+     ============================================================ -->
+<section class="valori">
+  <div class="container">
+    <div class="valori__head">
+      <h2 class="valori__title display reveal">Quattro <em>valori</em></h2>
+      <span class="eyebrow">Il nostro metodo</span>
+    </div>
+    <div class="valori__grid">
+      <div class="valore reveal">
+        <div class="valore__num">I.</div>
+        <div class="valore__name">Qualità</div>
+        <p class="valore__desc">Solo latte dei nostri quaranta soci, controllato ogni giorno. Nessuna scorciatoia, nessun additivo superfluo.</p>
+      </div>
+      <div class="valore reveal reveal--1">
+        <div class="valore__num">II.</div>
+        <div class="valore__name">Tradizione</div>
+        <p class="valore__desc">I gesti sono quelli del 1845: la cagliata, la rottura, la messa in forma. Il maestro casaro insegna al giovane.</p>
+      </div>
+      <div class="valore reveal reveal--2">
+        <div class="valore__num">III.</div>
+        <div class="valore__name">Innovazione</div>
+        <p class="valore__desc">Nel 2000 abbiamo ricostruito il caseificio da zero. Tecnologie nuove al servizio di un metodo antico.</p>
+      </div>
+      <div class="valore reveal reveal--3">
+        <div class="valore__num">IV.</div>
+        <div class="valore__name">Territorio</div>
+        <p class="valore__desc">Ogni forma porta con sé la Val di Non: i pascoli, le erbe, l'acqua delle sorgenti, il respiro delle Dolomiti.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     VISITA
+     ============================================================ -->
+<section class="visita" id="visita">
+  <div class="container">
+    <div class="visita__eye body-caps">Visita al caseificio</div>
+    <h2 class="visita__title display reveal">Vieni a vedere <em>come nasce</em></h2>
+    <p class="visita__body reveal reveal--1">Apriamo le porte del nostro caseificio. Racconteremo le vasche, le forme, il calore del siero che diventa formaggio. E a fine visita, una degustazione delle nostre specialità.</p>
+    <a href="#contatti" class="cta reveal reveal--2">Prenota la visita <span class="cta__arrow">→</span></a>
+  </div>
+</section>
+
+<!-- ============================================================
+     PUNTI VENDITA
+     ============================================================ -->
+<section class="vendita" id="vendita">
+  <div class="container">
+    <div class="vendita__head">
+      <span class="eyebrow">Dove trovarci</span>
+      <h2 class="vendita__title display reveal">I nostri <em>punti vendita</em></h2>
+    </div>
+    <div class="vendita__grid">
+      <div class="store reveal">
+        <h3 class="store__name">Fondo <em>— sede</em></h3>
+        <p class="store__addr">Via Venezia, 6 · 38013 Fondo (TN)<br/>tel. 0463 830130</p>
+        <dl class="store__hours">
+          <dt>Lun–Sab</dt><dd>07:30 – 12:30 &nbsp;·&nbsp; 15:30 – 19:00</dd>
+          <dt>Dom</dt><dd>08:00 – 12:00</dd>
+        </dl>
+      </div>
+      <div class="store reveal reveal--1">
+        <h3 class="store__name">Revò <em>— distaccamento</em></h3>
+        <p class="store__addr">Via 4 Novembre · 38028 Revò (TN)<br/>tel. 0463 432100</p>
+        <dl class="store__hours">
+          <dt>Lun–Sab</dt><dd>08:00 – 12:30 &nbsp;·&nbsp; 16:00 – 19:00</dd>
+          <dt>Dom</dt><dd>Chiuso</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTATTI
+     ============================================================ -->
+<section class="contatti" id="contatti">
+  <div class="container">
+    <div class="contatti__grid">
+      <div>
+        <span class="eyebrow">Contatti</span>
+        <h2 class="contatti__title display reveal">Scrivici <em>una riga</em></h2>
+        <div class="contatti__info">
+          <a href="tel:+390463830130">+39 0463 830130</a>
+          <a href="mailto:info@latteriasocialefondo.it">info@latteriasocialefondo.it</a>
+          <a href="https://maps.google.com/?q=Via+Venezia+6+Fondo+TN" target="_blank" rel="noopener">Via Venezia 6, 38013 Fondo (TN)</a>
+        </div>
+      </div>
+      <form class="form" id="contactForm" novalidate>
+        <div class="form__group">
+          <label class="form__label" for="nome">Nome</label>
+          <input class="form__input" type="text" id="nome" name="nome" required />
+        </div>
+        <div class="form__group">
+          <label class="form__label" for="email">Email</label>
+          <input class="form__input" type="email" id="email" name="email" required />
+        </div>
+        <div class="form__group form__group--full">
+          <label class="form__label" for="oggetto">Oggetto</label>
+          <input class="form__input" type="text" id="oggetto" name="oggetto" />
+        </div>
+        <div class="form__group form__group--full">
+          <label class="form__label" for="messaggio">Messaggio</label>
+          <textarea class="form__textarea" id="messaggio" name="messaggio" required></textarea>
+        </div>
+        <label class="form__privacy">
+          <input type="checkbox" required />
+          <span>Ho letto l'informativa privacy e acconsento al trattamento dei miei dati personali.</span>
+        </label>
+        <button type="submit" class="form__submit">Invia il messaggio →</button>
+        <div class="form__success">Grazie! Ti risponderemo entro 24 ore.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand display">Latteria Sociale<br/><em>di Fondo</em></div>
+      <div class="footer__col">
+        <h4>Navigazione</h4>
+        <ul>
+          <li><a href="#storia">Storia</a></li>
+          <li><a href="#kofel">Monte Mais Kofel</a></li>
+          <li><a href="#formaggi">Formaggi</a></li>
+          <li><a href="#territorio">Territorio</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Visita</h4>
+        <ul>
+          <li><a href="#visita">Al caseificio</a></li>
+          <li><a href="#vendita">Punti vendita</a></li>
+          <li><a href="#contatti">Contatti</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Segui</h4>
+        <ul>
+          <li><a href="https://www.facebook.com/latteriasocialefondo" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="mailto:info@latteriasocialefondo.it">Newsletter</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__psr">
+      <span class="eyebrow" style="color:var(--stone)">Con il sostegno di</span>
+    </div>
+    <div class="footer__bottom">
+      <span>© 1845–2026 Latteria Sociale di Fondo S.c.a.</span>
+      <span>P.IVA 00123456789 &nbsp;·&nbsp; Cookie &nbsp;·&nbsp; Privacy</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     JS — interactions
+     ============================================================ -->
+<script>
+(function () {
+  'use strict';
+
+  // Nav scroll state
+  const nav = document.getElementById('nav');
+  let lastY = 0;
+  window.addEventListener('scroll', function () {
+    const y = window.scrollY;
+    if (y > 80) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+    lastY = y;
+  }, { passive: true });
+
+  // Mobile burger toggle
+  const burger = document.getElementById('burger');
+  burger.addEventListener('click', function () {
+    nav.classList.toggle('open');
+  });
+  // Close mobile menu on link click
+  document.querySelectorAll('.nav__menu a').forEach(function (a) {
+    a.addEventListener('click', function () { nav.classList.remove('open'); });
+  });
+
+  // Language switcher (visual only; no real i18n loaded)
+  document.querySelectorAll('.nav__lang button').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.nav__lang button').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      const lang = btn.getAttribute('data-lang');
+      document.documentElement.setAttribute('lang', lang);
+    });
+  });
+
+  // Reveal on scroll
+  const io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+  // Form validation
+  const form = document.getElementById('contactForm');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    let valid = true;
+    form.querySelectorAll('[required]').forEach(function (field) {
+      if (field.type === 'checkbox') {
+        if (!field.checked) valid = false;
+      } else if (!field.value.trim()) {
+        valid = false;
+        field.style.borderColor = '#8B4A32';
+      } else {
+        field.style.borderColor = '';
+      }
+    });
+    const email = form.querySelector('#email');
+    if (email.value && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value)) {
+      valid = false;
+      email.style.borderColor = '#8B4A32';
+    }
+    if (valid) {
+      form.classList.add('sent');
+      form.querySelector('.form__submit').disabled = true;
+      form.querySelector('.form__submit').textContent = 'Messaggio inviato ✓';
+    }
+  });
+
+  // Reset error color on input
+  form.querySelectorAll('.form__input, .form__textarea').forEach(function (input) {
+    input.addEventListener('input', function () { input.style.borderColor = ''; });
+  });
+})();
+</script>
+
+</body>
+</html>
